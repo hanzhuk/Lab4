@@ -128,6 +128,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="btSignUp">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>注册</string>
          </property>
@@ -135,6 +141,12 @@
        </item>
        <item>
         <widget class="QPushButton" name="btSignIn">
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="text">
           <string>登录</string>
          </property>
