@@ -33,6 +33,10 @@ void MasterView::goWelcomeView()
 
     pushWidgetToStackView(welcomeView);
 
+    connect(welcomeView,SIGNAL(goDoctorView()),this,SLOT(goDoctorView()));
+    connect(welcomeView,SIGNAL(goPatientView()),this,SLOT(goPatientView()));
+    connect(welcomeView,SIGNAL(goDepartmentView()),this,SLOT(goDepartmentView()));
+
 }
 
 void MasterView::goDoctorView()
@@ -68,6 +72,8 @@ void MasterView::goPatientView()
     patientView = new PatientView(this);
 
     pushWidgetToStackView(patientView);
+
+    connect(patientView,SIGNAL(goPatientEditView()),this,SLOT(goPatientEditView()));
 
 }
 
