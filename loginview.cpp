@@ -21,5 +21,6 @@ void LoginView::on_btSignIn_clicked()
     if(status == "loginOk")
         emit loginSuccess();
 
+
 }
 
