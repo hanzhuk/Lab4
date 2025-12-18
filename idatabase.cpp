@@ -1,4 +1,5 @@
 #include "idatabase.h"
+#include <QUuid>
 
 void IDatabase::ininDatabase()
 {
@@ -29,11 +30,18 @@ bool IDatabase::initPatientModel()
 
 int IDatabase::addNewPatient()
 {
-    // 在模型末尾添加一个新记录行
     patientTabModel->insertRow(patientTabModel->rowCount(), QModelIndex());
-    // 创建刚插入的最后一行（列索引为1）的模型索引
+
     QModelIndex curIndex = patientTabModel->index(patientTabModel->rowCount() - 1, 1);
-    // 返回新添加行的行号
+
+    int curRecNo = curIndex.row();
+    QSqlRecord curRec = patientTabModel->record(curRecNo);
+    curRec.setValue("CREATEDTIMESTAMP", QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+    curRec.setValue("ID", QUuid::createUuid().toString(QUuid::WithoutBraces));
+
+    patientTabModel->setRecord(curRecNo, curRec);
+
+
     return curIndex.row();
 }
 
@@ -46,9 +54,14 @@ bool IDatabase::searchPatient(QString filter)
 bool IDatabase::deleteCurrentPatient()
 {
     QModelIndex curIndex = thePatientSelection->currentIndex(); // 获取当前选择单元格的模型索引
+
+    if (!curIndex.isValid()) {
+        return false;
+    }
     patientTabModel->removeRow(curIndex.row());
     patientTabModel->submitAll();
     patientTabModel->select();
+    return true; // 补上返回值
 }
 
 bool IDatabase::submitPatientEdit()

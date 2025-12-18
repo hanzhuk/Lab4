@@ -24,6 +24,8 @@ PatientEditView::PatientEditView(QWidget *parent, int index)
     dataMapper->addMapping(ui->dbCreatedTimeStamp, tabModel->fieldIndex("CREATEDTIMESTAMP"));
 
     dataMapper->setCurrentIndex(index);
+
+    ui->dbEditID->setEnabled(false);
 }
 
 PatientEditView::~PatientEditView()
